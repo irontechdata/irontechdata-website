@@ -22,24 +22,14 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
-export type Footer = {
+export type SocialLinks = {
   _id: string;
-  _type: "footer";
+  _type: "socialLinks";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  logo?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  addressText?: string;
-  phoneLandline?: string;
-  phoneMobile?: string;
-  email?: string;
-  socialIcons?: Array<{
+  title?: string;
+  icons?: Array<{
     icon?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -47,6 +37,7 @@ export type Footer = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    iconName?: string;
     link?: string;
     _key: string;
   }>;
@@ -68,12 +59,40 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
+export type Footer = {
+  _id: string;
+  _type: "footer";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  pageTitle?: string;
+  logo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  addressText?: string;
+  phoneLandline?: string;
+  phoneMobile?: string;
+  email?: string;
+  footerBackgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type Header = {
   _id: string;
   _type: "header";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  pageTitle?: string;
   logo?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -86,17 +105,13 @@ export type Header = {
     link?: string;
     _key: string;
   }>;
-  icons?: Array<{
-    icon?: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    link?: string;
-    _key: string;
-  }>;
+  navBackgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type SiteSettings = {
@@ -122,6 +137,7 @@ export type PageLanding = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  pageTitle?: string;
   heroSection?: {
     backgroundImages?: Array<{
       asset?: SanityImageAssetReference;
@@ -147,6 +163,20 @@ export type PageLanding = {
     title?: string;
     description?: string;
     backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImageGradient?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImageNodes?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
@@ -189,6 +219,20 @@ export type PageLanding = {
   };
   partners?: {
     backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImageGradient?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImageNodes?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
@@ -311,9 +355,10 @@ export type Slug = {
 
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
-  | Footer
+  | SocialLinks
   | SanityImageCrop
   | SanityImageHotspot
+  | Footer
   | Header
   | SiteSettings
   | PageLanding
@@ -372,6 +417,20 @@ export type PageLandingQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    backgroundImageGradient?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImageNodes?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     cta?: {
       label?: string;
       link?: string;
@@ -414,6 +473,20 @@ export type PageLandingQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    backgroundImageGradient?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImageNodes?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     partnerImages?: Array<{
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -425,11 +498,82 @@ export type PageLandingQueryResult = {
   } | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: headerQuery
+// Query: *[_type == "header"][0] {    logo,    navLinks,    navBackgroundImage  }
+export type HeaderQueryResult = {
+  logo: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  navLinks: Array<{
+    label?: string;
+    link?: string;
+    _key: string;
+  }> | null;
+  navBackgroundImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+} | null;
+
+// Source: src/sanity/queries.ts
+// Variable: footerQuery
+// Query: *[_type == "footer"][0] {    logo,    addressText,    phoneLandline,    phoneMobile,    email,    footerBackgroundImage  }
+export type FooterQueryResult = {
+  logo: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  addressText: string | null;
+  phoneLandline: string | null;
+  phoneMobile: string | null;
+  email: string | null;
+  footerBackgroundImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+} | null;
+
+// Source: src/sanity/queries.ts
+// Variable: socialLinksQuery
+// Query: *[_type == "socialLinks"][0] {    title,    icons  }
+export type SocialLinksQueryResult = {
+  title: string | null;
+  icons: Array<{
+    icon?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    iconName?: string;
+    link?: string;
+    _key: string;
+  }> | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "siteSettings"][0] {\n    title,\n    description,\n    "ogImageUrl": ogImage.asset->url\n  }\n': SiteSettingsQueryResult;
     '\n  *[_type == "pageLanding"][0] {\n    _id,\n    heroSection,\n    aboutSection,\n    ourServices,\n    partners\n  }\n': PageLandingQueryResult;
+    '\n  *[_type == "header"][0] {\n    logo,\n    navLinks,\n    navBackgroundImage\n  }\n': HeaderQueryResult;
+    '\n  *[_type == "footer"][0] {\n    logo,\n    addressText,\n    phoneLandline,\n    phoneMobile,\n    email,\n    footerBackgroundImage\n  }\n': FooterQueryResult;
+    '\n  *[_type == "socialLinks"][0] {\n    title,\n    icons\n  }\n': SocialLinksQueryResult;
   }
 }
