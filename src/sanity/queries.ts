@@ -10,9 +10,36 @@ export const siteSettingsQuery = defineQuery(`
 
 export const pageLandingQuery = defineQuery(`
   *[_type == "pageLanding"][0] {
-    heroTitle,
-    heroSubtitle,
-    ctaText,
-    ctaLink
+    _id,
+    heroSection,
+    aboutSection,
+    ourServices,
+    partners
+  }
+`);
+
+export const headerQuery = defineQuery(`
+  *[_type == "header"][0] {
+    logo,
+    navLinks,
+    navBackgroundImage
+  }
+`);
+
+export const footerQuery = defineQuery(`
+  *[_type == "footer"][0] {
+    logo,
+    addressText,
+    phoneLandline,
+    phoneMobile,
+    email,
+    footerBackgroundImage
+  }
+`);
+
+export const socialLinksQuery = defineQuery(`
+  *[_type == "socialLinks"][0] {
+    title,
+    icons
   }
 `);
