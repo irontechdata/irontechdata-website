@@ -97,6 +97,8 @@ export const pageLanding = defineType({
             title: "Our Services",
             type: "object",
             fields: [
+                defineField({ name: "title", title: "Title", type: "string" }),
+
                 defineField({
                     name: "backgroundImage",
                     title: "Background Image",
