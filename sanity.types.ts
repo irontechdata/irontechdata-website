@@ -196,6 +196,7 @@ export type PageLanding = {
     };
   };
   ourServices?: {
+    title?: string;
     backgroundImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -248,6 +249,21 @@ export type PageLanding = {
       _key: string;
     }>;
   };
+};
+
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -347,12 +363,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | SocialLinks
@@ -362,6 +372,8 @@ export type AllSanitySchemaTypes =
   | Header
   | SiteSettings
   | PageLanding
+  | MediaTag
+  | Slug
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -369,8 +381,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
-  | Slug;
+  | Geopoint;
 
 // Source: src/sanity/queries.ts
 // Variable: siteSettingsQuery
@@ -444,6 +455,7 @@ export type PageLandingQueryResult = {
     };
   } | null;
   ourServices: {
+    title?: string;
     backgroundImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
