@@ -7,6 +7,28 @@ import { Phone, Smartphone, Mail, MapPin } from "lucide-react";
 
 import { ContactForm } from "../contactForm/contactForm";
 
+import { motion } from "motion/react";
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.1,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.5 },
+    },
+};
+
 export const Footer = ({
     footerData,
     socialLinksData,
@@ -17,7 +39,7 @@ export const Footer = ({
     const contactInfoData = [
         {
             icon: (
-                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white">
+                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(18,98,153,0.5)]">
                     <MapPin size={20} strokeWidth={2} />
                 </div>
             ),
@@ -25,7 +47,7 @@ export const Footer = ({
         },
         {
             icon: (
-                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white">
+                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(18,98,153,0.5)]">
                     <Phone size={20} strokeWidth={2} />
                 </div>
             ),
@@ -33,7 +55,7 @@ export const Footer = ({
         },
         {
             icon: (
-                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white">
+                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(18,98,153,0.5)]">
                     <Smartphone size={20} strokeWidth={2} />
                 </div>
             ),
@@ -41,7 +63,7 @@ export const Footer = ({
         },
         {
             icon: (
-                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white">
+                <div className="flex shrink-0 items-center justify-center rounded-full bg-primary p-2 text-white transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(18,98,153,0.5)]">
                     <Mail size={20} strokeWidth={2} />
                 </div>
             ),
@@ -69,17 +91,24 @@ export const Footer = ({
                         className="h-36 object-contain text-stone-100 dark:brightness-0 dark:invert"
                     />
 
-                    <div className="flex flex-col gap-1">
+                    <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        className="flex flex-col gap-1"
+                    >
                         {contactInfoData?.map((contactInfo, index) => (
-                            <div
+                            <motion.div
                                 key={index}
-                                className="flex items-center gap-4 py-2 font-bold"
+                                variants={itemVariants}
+                                className="flex items-center gap-4 py-2 font-bold group cursor-pointer transition-all duration-300 hover:translate-x-2"
                             >
                                 {contactInfo?.icon}
-                                <span className="text-xl">{contactInfo?.text}</span>
-                            </div>
+                                <span className="text-xl transition-colors duration-300 group-hover:text-primary">{contactInfo?.text}</span>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
 
                 <div className="relative z-10 flex flex-1 items-center justify-center">
