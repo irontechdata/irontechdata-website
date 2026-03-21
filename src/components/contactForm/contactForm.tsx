@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { sendContactEmail } from "@/actions/send-email";
 import { contactFormSchema } from "@/lib/schemas";
 
-
 export const ContactForm = () => {
     const [isPending, startTransition] = useTransition();
 
@@ -69,7 +68,7 @@ export const ContactForm = () => {
                                 />
                                 {isInvalid && (
                                     <p className="text-sm font-medium text-destructive">
-                                        {field.state.meta.errors.join(", ")}
+                                        {field.state.meta.errors[0]?.message}
                                     </p>
                                 )}
                             </div>
@@ -99,7 +98,7 @@ export const ContactForm = () => {
                                 />
                                 {isInvalid && (
                                     <p className="text-sm font-medium text-destructive">
-                                        {field.state.meta.errors.join(", ")}
+                                        {field.state.meta.errors[0]?.message}
                                     </p>
                                 )}
                             </div>
@@ -129,7 +128,7 @@ export const ContactForm = () => {
                                 />
                                 {isInvalid && (
                                     <p className="text-sm font-medium text-destructive">
-                                        {field.state.meta.errors.join(", ")}
+                                        {field.state.meta.errors[0]?.message}
                                     </p>
                                 )}
                             </div>
@@ -144,7 +143,10 @@ export const ContactForm = () => {
                     <Button
                         type="submit"
                         disabled={!canSubmit || isPending || isSubmitting}
-                        className="w-full rounded-full bg-primary py-6 text-2xl font-bold uppercase tracking-wider text-white transition-all hover:scale-[1.02] hover:bg-primary/90 active:scale-95 disabled:pointer-events-none disabled:opacity-50"
+                        className={`w-full rounded-full py-6 text-2xl font-bold uppercase tracking-wider text-white transition-all hover:scale-[1.02] hover:bg-primary/90 active:scale-95 disabled:pointer-events-none disabled:opacity-50 
+                            ${isPending || isSubmitting ? "bg-primary" : "bg-primary"}
+                            ${!canSubmit || isPending || isSubmitting ? "cursor-not-allowed" : "cursor-pointer"}
+                        `}
                     >
                         {isPending || isSubmitting ? "SENDING..." : "SUBMIT"}
                     </Button>
