@@ -64,7 +64,7 @@ const main = {
 const container = {
     backgroundColor: "#ffffff",
     margin: "0 auto",
-    padding: "20px 0 48px",
+    padding: "20px 24px 48px",
     marginBottom: "64px",
 };
 
@@ -85,7 +85,7 @@ const heading = {
 };
 
 const section = {
-    margin: "24px",
+    margin: "0",
     padding: "24px",
     border: "solid 1px #dedede",
     borderRadius: "10px",
