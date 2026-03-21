@@ -7,6 +7,9 @@ import { contactFormSchema, type ContactFormValues } from "@/lib/schemas";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactEmail(data: ContactFormValues) {
+    const isDev = process.env.NODE_ENV === "development";
+    const toEmail = isDev ? ["jan@irontechdata.com"] : ["sales@irontechdata.com"];
+
     try {
         const validatedFields = contactFormSchema.safeParse(data);
 
@@ -18,7 +21,7 @@ export async function sendContactEmail(data: ContactFormValues) {
 
         const { data: resendData, error } = await resend.emails.send({
             from: "Iron Tech Data Contact <noreply@irontechdata.com>",
-            to: ["sales@irontechdata.com"],
+            to: toEmail,
             subject: `New Inquiry from ${name}`,
             react: <ContactEmailTemplate name={name} email={email} message={message} />,
             replyTo: email,
