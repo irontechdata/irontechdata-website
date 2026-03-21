@@ -28,7 +28,7 @@ export const Header = ({
     const pathname = usePathname();
 
     return (
-        <header className="w-full sticky top-0 z-50">
+        <header className="w-full bg-white sticky top-0 z-50">
             <section className="container mx-auto flex items-center justify-around">
                 <Link href="/" className="cursor-pointer p-2">
                     <Image
