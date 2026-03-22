@@ -82,7 +82,7 @@ export const PartnersSection = ({ data }: { data: PartnersSectionData }) => {
                         </CarouselContent>
                     </Carousel>
                 ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-3xl mx-auto items-center justify-center gap-4 lg:gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 w-full max-w-3xl mx-auto items-center justify-center gap-4 lg:gap-8">
                         {data.partnerImages.map((image, i) => (
                             <div key={image._key || i} className="">
                                 <LogoItem image={image} index={i} />
