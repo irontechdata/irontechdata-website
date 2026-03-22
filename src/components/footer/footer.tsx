@@ -79,16 +79,15 @@ export const Footer = ({
                 fill
                 className="object-cover z-0"
             />
-            <div className="absolute inset-0 bg-white/60 dark:bg-black/80 z-0"></div>
 
-            <section className="relative z-10 container mx-auto flex flex-col items-center justify-center gap-12 px-8 lg:flex-row lg:items-center text-black dark:text-white">
-                <div className="flex flex-1 flex-col gap-10 lg:items-start">
+            <section className="relative z-10 container mx-auto flex flex-col items-center justify-evenly gap-12 px-8 lg:flex-row lg:items-center text-black dark:text-white">
+                <div className="flex flex-col gap-10 lg:items-start">
                     <Image
                         src={urlFor(footerData?.logo ?? "").url()}
                         alt="Logo"
                         width={300}
                         height={100}
-                        className="h-36 object-contain text-stone-100 dark:brightness-0 dark:invert"
+                        className="h-36 object-contain self-center lg:self-auto text-stone-100 dark:brightness-0 dark:invert"
                     />
 
                     <motion.div 
@@ -111,7 +110,7 @@ export const Footer = ({
                     </motion.div>
                 </div>
 
-                <div className="relative z-10 flex flex-1 items-center justify-center">
+                <div className="relative z-10 w-full max-w-md flex items-center justify-center">
                     <ContactForm />
                 </div>
             </section>
