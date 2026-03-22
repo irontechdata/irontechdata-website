@@ -147,7 +147,7 @@ export const HeroSection = ({ data }: { data: HeroSectionData }) => {
                     >
                         <Button
                             asChild
-                            className="rounded-full bg-[#126299] hover:bg-[#0f5280] py-6 px-10 text-xl font-bold uppercase tracking-[0.2em] text-white shadow-xl transition-all hover:scale-105"
+                            className="rounded-full bg-[#126299] hover:bg-[#0f5280] py-4 px-8 md:py-6 md:px-10 md:text-xl font-bold uppercase tracking-[0.2em] text-white shadow-xl transition-all hover:scale-105"
                         >
                             <Link href={data.cta.link}>{data.cta.label}</Link>
                         </Button>
