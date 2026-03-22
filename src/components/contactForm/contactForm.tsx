@@ -43,7 +43,7 @@ export const ContactForm = () => {
                 e.stopPropagation();
                 form.handleSubmit();
             }}
-            className="flex w-full max-w-md flex-col gap-6"
+            className="flex w-full max-w-3xl flex-col gap-6"
         >
             <div className="flex flex-col gap-2">
                 <form.Field
