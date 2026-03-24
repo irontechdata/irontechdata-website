@@ -22,6 +22,154 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type PageAbout = {
+  _id: string;
+  _type: "pageAbout";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  pageTitle?: string;
+  companyOverview?: {
+    title?: string;
+    description?: Array<string>;
+    mainIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    hexagonNodeIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  missionVision?: {
+    mission?: {
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    vision?: {
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  whatWeDoSection?: {
+    whatWeDo?: {
+      title?: string;
+      description?: string;
+      items?: Array<string>;
+    };
+    ourApproach?: {
+      title?: string;
+      description?: string;
+      items?: Array<string>;
+    };
+    whyChoose?: {
+      title?: string;
+      items?: Array<string>;
+    };
+    mainIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    hexagonNodeIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  customersCommitment?: {
+    targetCustomers?: {
+      title?: string;
+      description?: string;
+      graphic?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    ourCommitment?: {
+      title?: string;
+      description?: string;
+    };
+  };
+  companyInformation?: {
+    companyName?: string;
+    brandName?: string;
+    industry?: string;
+    coreFocus?: string;
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type SocialLinks = {
   _id: string;
   _type: "socialLinks";
@@ -41,22 +189,6 @@ export type SocialLinks = {
     link?: string;
     _key: string;
   }>;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type Footer = {
@@ -365,9 +497,10 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
-  | SocialLinks
+  | PageAbout
   | SanityImageCrop
   | SanityImageHotspot
+  | SocialLinks
   | Footer
   | Header
   | SiteSettings
@@ -578,6 +711,137 @@ export type SocialLinksQueryResult = {
   }> | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: pageAboutQuery
+// Query: *[_type == "pageAbout"][0] {      _id,      pageTitle,      companyOverview,      missionVision,      whatWeDoSection,      customersCommitment,      companyInformation    }
+export type PageAboutQueryResult = {
+  _id: string;
+  pageTitle: string | null;
+  companyOverview: {
+    title?: string;
+    description?: Array<string>;
+    mainIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    hexagonNodeIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
+  missionVision: {
+    mission?: {
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    vision?: {
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
+  whatWeDoSection: {
+    whatWeDo?: {
+      title?: string;
+      description?: string;
+      items?: Array<string>;
+    };
+    ourApproach?: {
+      title?: string;
+      description?: string;
+      items?: Array<string>;
+    };
+    whyChoose?: {
+      title?: string;
+      items?: Array<string>;
+    };
+    mainIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    hexagonNodeIllustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
+  customersCommitment: {
+    targetCustomers?: {
+      title?: string;
+      description?: string;
+      graphic?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    ourCommitment?: {
+      title?: string;
+      description?: string;
+    };
+  } | null;
+  companyInformation: {
+    companyName?: string;
+    brandName?: string;
+    industry?: string;
+    coreFocus?: string;
+    backgroundImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -587,5 +851,6 @@ declare module "@sanity/client" {
     '\n  *[_type == "header"][0] {\n    logo,\n    navLinks,\n    navBackgroundImage\n  }\n': HeaderQueryResult;
     '\n  *[_type == "footer"][0] {\n    logo,\n    addressText,\n    phoneLandline,\n    phoneMobile,\n    email,\n    footerBackgroundImage\n  }\n': FooterQueryResult;
     '\n  *[_type == "socialLinks"][0] {\n    title,\n    icons\n  }\n': SocialLinksQueryResult;
+    '\n    *[_type == "pageAbout"][0] {\n      _id,\n      pageTitle,\n      companyOverview,\n      missionVision,\n      whatWeDoSection,\n      customersCommitment,\n      companyInformation\n    }\n': PageAboutQueryResult;
   }
 }
