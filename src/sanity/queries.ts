@@ -43,3 +43,15 @@ export const socialLinksQuery = defineQuery(`
     icons
   }
 `);
+
+export const pageAboutQuery = defineQuery(`
+    *[_type == "pageAbout"][0] {
+      _id,
+      pageTitle,
+      companyOverview,
+      missionVision,
+      whatWeDoSection,
+      customersCommitment,
+      companyInformation
+    }
+`);
