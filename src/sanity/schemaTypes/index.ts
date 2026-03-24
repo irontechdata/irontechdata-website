@@ -4,7 +4,8 @@ import { siteSettings } from "./siteSettings";
 import { header } from "./header";
 import { footer } from "./footer";
 import { socialLinks } from "./socialLinks";
+import { pageAbout } from "./pageAbout";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-    types: [pageLanding, siteSettings, header, footer, socialLinks],
+    types: [pageLanding, siteSettings, header, footer, socialLinks, pageAbout],
 };
