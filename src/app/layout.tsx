@@ -35,9 +35,13 @@ const akrobat = localFont({
 
 export async function generateMetadata(): Promise<Metadata> {
     const { data: settings } = await sanityFetch({ query: siteSettingsQuery });
+    const siteTitle = settings?.title || "Iron Tech Data";
 
     return {
-        title: settings?.title,
+        title: {
+            template: `%s - ${siteTitle}`,
+            default: siteTitle,
+        },
         description: settings?.description,
         openGraph: {
             images: [
