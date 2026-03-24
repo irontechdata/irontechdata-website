@@ -1,14 +1,18 @@
 import { PageAboutQueryResult } from "../../../sanity.types";
+import { PortableText } from "next-sanity";
 
-type CompanyOverviewSection = NonNullable<PageAboutQueryResult>["companyOverview"];
+type CompanyOverviewSection =
+  NonNullable<PageAboutQueryResult>["companyOverview"];
 
 export const CompanyOverview = ({ data }: { data: CompanyOverviewSection }) => {
-    return (
-        <section id="company-overview">
-            <h2>{data?.title || "Company Overview"}</h2>
-            {data?.description?.map((text: string, i: number) => (
-                <p key={i}>{text}</p>
-            ))}
-        </section>
-    );
+  if (!data) return null;
+
+  const { title, description } = data || {};
+
+  return (
+    <section id="company-overview">
+      <h2>{title || "Company Overview"}</h2>
+      {description && <PortableText value={description} />}
+    </section>
+  );
 };
