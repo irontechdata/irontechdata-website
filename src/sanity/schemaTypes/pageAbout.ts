@@ -205,6 +205,12 @@ export const pageAbout = defineType({
       type: "object",
       fields: [
         defineField({
+          name: "logo",
+          title: "Logo",
+          type: "image",
+          options: { hotspot: true },
+        }),
+        defineField({
           name: "companyName",
           title: "Company Name",
           type: "string",
