@@ -38,7 +38,7 @@ export const WhatWeDo = ({ data }: { data: WhatWeDoSection }) => {
 
       {/* Hexagon Node Overlay */}
       {hexagonNodeIllustration && (
-        <div className="absolute inset-0 z-[1] opacity-30 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 z-1 opacity-30 flex items-center justify-center pointer-events-none">
           <Image
             src={urlFor(hexagonNodeIllustration).url()}
             alt="Hexagon Nodes"
@@ -49,17 +49,29 @@ export const WhatWeDo = ({ data }: { data: WhatWeDoSection }) => {
         </div>
       )}
 
-      <div className="container relative z-10 flex flex-col lg:flex-row items-center justify-evenly gap-8 lg:gap-12">
-        {/* Main Illustration — Left (taller) */}
+      {/* Main Illustration — overlay on mobile/tablet, inline on lg+ */}
+      {mainIllustration && (
+        <div className="absolute inset-0 z-2 pointer-events-none opacity-15 lg:hidden">
+          <Image
+            src={urlFor(mainIllustration).url()}
+            alt="What We Do Illustration"
+            fill
+            className="object-contain object-center"
+          />
+        </div>
+      )}
+
+      <div className="container mx-auto relative z-10 flex flex-col lg:flex-row items-center justify-evenly gap-4 lg:gap-8">
+        {/* Main Illustration — visible only on lg+ as inline column */}
         {mainIllustration && (
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="flex-1 w-full max-w-md lg:max-w-lg z-10"
+            className="hidden lg:block flex-1 w-full max-w-lg z-10"
           >
-            <div className="relative aspect-[3/4] lg:aspect-[2/3]">
+            <div className="relative aspect-3/5">
               <Image
                 src={urlFor(mainIllustration).url()}
                 alt="What We Do Illustration"

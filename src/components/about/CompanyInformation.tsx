@@ -40,7 +40,7 @@ export const CompanyInformation = ({
 
       {/* Hexagon Node Overlay */}
       {hexagonNodeIllustration && (
-        <div className="absolute inset-0 z-[1] opacity-30 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 z-1 opacity-30 flex items-center justify-center pointer-events-none">
           <Image
             src={urlFor(hexagonNodeIllustration).url()}
             alt="Hexagon Nodes"
@@ -58,14 +58,14 @@ export const CompanyInformation = ({
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="flex-1 flex items-center justify-center z-10"
+          className="flex items-center justify-center z-10"
         >
           {logo && (
             <Image
               src={urlFor(logo).url()}
               alt="Company Logo"
-              width={400}
-              height={200}
+              width={800}
+              height={600}
               className="object-contain max-w-full"
             />
           )}
