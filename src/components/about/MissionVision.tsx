@@ -22,26 +22,26 @@ export const MissionVision = ({ data }: { data: MissionVisionSection }) => {
   const { mission, vision, backgroundImage } = data;
 
   return (
-    <section className="relative w-full py-20 lg:py-28 px-4 bg-white overflow-hidden">
-      <div className="container relative z-10">
+    <section className="relative w-full py-5 lg:py-10 px-4 bg-white overflow-hidden">
+      <div className="container mx-auto relative z-10">
         {/* Inner wrapper — background hugs this div */}
-        <div className="relative overflow-hidden rounded-lg">
+        <div className="relative overflow-visible rounded-lg">
           {/* Background Overlay Illustration — hugs this inner div */}
           {backgroundImage && (
-            <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-2xl lg:max-w-2xl w-4/5 h-full md:h-3/4 scale-125 lg:scale-150 z-0 pointer-events-none">
               <Image
                 src={urlFor(backgroundImage).url()}
                 alt="Background Overlay"
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
           )}
 
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 py-16 px-8 lg:px-16">
+          <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10 py-4 px-4 lg:px-8">
             {/* Mission — text-left */}
             <motion.div
-              custom={0}
+              custom={1}
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
@@ -58,17 +58,17 @@ export const MissionVision = ({ data }: { data: MissionVisionSection }) => {
                   />
                 </div>
               )}
-              <h3 className="text-2xl lg:text-3xl font-extrabold text-[#126299] uppercase tracking-wide">
+              <h3 className="text-2xl lg:text-3xl font-extrabold text-[#126299] uppercase tracking-wide text-left w-full">
                 {mission?.title || "Our Mission"}
               </h3>
-              <p className="text-lg lg:text-xl text-gray-700 leading-relaxed max-w-md">
+              <p className="text-md md:text-xl lg:text-3xl text-gray-700 leading-relaxed max-w-md md:max-w-2xl text-left">
                 {mission?.description}
               </p>
             </motion.div>
 
             {/* Vision — text-right */}
             <motion.div
-              custom={1}
+              custom={0}
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
@@ -85,10 +85,10 @@ export const MissionVision = ({ data }: { data: MissionVisionSection }) => {
                   />
                 </div>
               )}
-              <h3 className="text-2xl lg:text-3xl font-extrabold text-[#126299] uppercase tracking-wide">
+              <h3 className="text-2xl lg:text-3xl font-extrabold text-[#126299] uppercase tracking-wide text-right w-full">
                 {vision?.title || "Our Vision"}
               </h3>
-              <p className="text-lg lg:text-xl text-gray-700 leading-relaxed max-w-md">
+              <p className="text-md md:text-xl lg:text-3xl text-gray-700 leading-relaxed max-w-md md:max-w-2xl text-right">
                 {vision?.description}
               </p>
             </motion.div>
