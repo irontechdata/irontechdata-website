@@ -230,6 +230,13 @@ export type PageAbout = {
     };
   };
   companyInformation?: {
+    logo?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     companyName?: string;
     brandName?: string;
     industry?: string;
@@ -1015,6 +1022,13 @@ export type PageAboutQueryResult = {
     };
   } | null;
   companyInformation: {
+    logo?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     companyName?: string;
     brandName?: string;
     industry?: string;
