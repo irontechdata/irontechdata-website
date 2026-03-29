@@ -22,6 +22,74 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type PageServices = {
+  _id: string;
+  _type: "pageServices";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  pageTitle?: string;
+  hexagonNodeIllustration?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  networkNodeIllustration?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  services?: Array<{
+    title?: string;
+    illustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    description?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _key: string;
+  }>;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type PageAbout = {
   _id: string;
   _type: "pageAbout";
@@ -256,22 +324,6 @@ export type PageAbout = {
       _type: "image";
     };
   };
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type SocialLinks = {
@@ -601,9 +653,10 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
-  | PageAbout
+  | PageServices
   | SanityImageCrop
   | SanityImageHotspot
+  | PageAbout
   | SocialLinks
   | Footer
   | Header
@@ -1050,6 +1103,57 @@ export type PageAboutQueryResult = {
   } | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: pageServicesQuery
+// Query: *[_type == "pageServices"][0] {      _id,      pageTitle,      hexagonNodeIllustration,      networkNodeIllustration,      services    }
+export type PageServicesQueryResult = {
+  _id: string;
+  pageTitle: string | null;
+  hexagonNodeIllustration: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  networkNodeIllustration: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  services: Array<{
+    title?: string;
+    illustration?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    description?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _key: string;
+  }> | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -1060,5 +1164,6 @@ declare module "@sanity/client" {
     '\n  *[_type == "footer"][0] {\n    logo,\n    addressText,\n    phoneLandline,\n    phoneMobile,\n    email,\n    footerBackgroundImage\n  }\n': FooterQueryResult;
     '\n  *[_type == "socialLinks"][0] {\n    title,\n    icons\n  }\n': SocialLinksQueryResult;
     '\n    *[_type == "pageAbout"][0] {\n      _id,\n      pageTitle,\n      companyOverview,\n      missionVision,\n      whatWeDoSection,\n      customersCommitment,\n      companyInformation\n    }\n': PageAboutQueryResult;
+    '\n    *[_type == "pageServices"][0] {\n      _id,\n      pageTitle,\n      hexagonNodeIllustration,\n      networkNodeIllustration,\n      services\n    }\n': PageServicesQueryResult;
   }
 }
