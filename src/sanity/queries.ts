@@ -55,3 +55,13 @@ export const pageAboutQuery = defineQuery(`
       companyInformation
     }
 `);
+
+export const pageServicesQuery = defineQuery(`
+    *[_type == "pageServices"][0] {
+      _id,
+      pageTitle,
+      hexagonNodeIllustration,
+      networkNodeIllustration,
+      services
+    }
+`);
