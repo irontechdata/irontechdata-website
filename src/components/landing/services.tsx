@@ -4,6 +4,9 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { PageLandingQueryResult } from "../../../sanity.types";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { MoveRight } from "lucide-react";
 
 type ServicesSectionData = NonNullable<NonNullable<PageLandingQueryResult>["ourServices"]>;
 
@@ -70,31 +73,45 @@ export const ServicesSection = ({ data }: { data: ServicesSectionData }) => {
                         <motion.div 
                             key={service._key}
                             variants={itemVariants}
-                            className="flex flex-col items-center text-center gap-6 group"
+                            className="flex flex-col items-center text-center group cursor-pointer"
                         >
-                            {/* Service Icon */}
-                            {service.icon && (
-                                <div className="relative w-24 h-24 lg:w-32 lg:h-32 transition-transform duration-300 group-hover:scale-110">
-                                    <Image
-                                        src={urlFor(service.icon).url()}
-                                        alt={service.title || "Service Icon"}
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            )}
-
-                            {/* Service Details */}
-                            <div className="flex flex-col gap-2">
-                                <h3 className="text-xl lg:text-2xl font-bold text-[#126299] leading-none">
-                                    {service.title}
-                                </h3>
-                                {service.subtitle && (
-                                    <p className="text-base lg:text-lg text-[#126299]/70 font-medium leading-tight">
-                                        {service.subtitle}
-                                    </p>
+                            <Link 
+                                href={service.link || "#"} 
+                                className={cn(
+                                    "flex flex-col items-center text-center gap-6 w-full h-full",
+                                    !(service as any).link && "pointer-events-none"
                                 )}
-                            </div>
+                            >
+                                {/* Service Icon */}
+                                {service.icon && (
+                                    <div className="relative w-24 h-24 lg:w-32 lg:h-32 transition-transform duration-300 group-hover:scale-110">
+                                        <Image
+                                            src={urlFor(service.icon).url()}
+                                            alt={service.title || "Service Icon"}
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                )}
+
+                                {/* Service Details */}
+                                <div className="flex flex-col gap-2">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-[#126299] leading-none">
+                                        {service.title}
+                                    </h3>
+                                    {service.subtitle && (
+                                        <p className="text-base lg:text-lg text-[#126299]/70 font-medium leading-tight">
+                                            {service.subtitle}
+                                        </p>
+                                    )}
+                                    {service.link && (
+                                        <div className="mt-4 flex items-center justify-center gap-2 text-[#126299] font-bold transition-all duration-300 group-hover:gap-4">
+                                            <span className="uppercase tracking-wider text-sm">Read More</span>
+                                            <MoveRight size={18} className="transition-transform duration-300" />
+                                        </div>
+                                    )}
+                                </div>
+                            </Link>
                         </motion.div>
                     ))}
                 </motion.div>
