@@ -79,7 +79,7 @@ export const Header = ({
                 </Link>
 
                 {/* DESKTOP NAV (Hidden on Tablet and Mobile) - Breakpoint at lg (1024px) */}
-                <div className="hidden lg:flex relative items-center justify-center flex-1 min-h-20 max-w-4xl ml-20 overflow-hidden rounded-full">
+                <div className="hidden lg:flex relative items-center justify-center flex-1 min-h-20 max-w-4xl ml-20">
                     {headerData?.navBackgroundImage && (
                         <Image
                             src={urlFor(headerData?.navBackgroundImage).url()}

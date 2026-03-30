@@ -3,9 +3,30 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
+import { motion } from "motion/react";
 import { PageServicesQueryResult } from "../../../sanity.types";
 
 type Services = { data: NonNullable<PageServicesQueryResult> };
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.3,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5 },
+    },
+};
 
 export const OurServices = ({ data }: Services) => {
   if (!data) return null;
@@ -22,12 +43,12 @@ export const OurServices = ({ data }: Services) => {
       {/* Background Overlays */}
       {/* Top 1/3 Hexagon Node */}
       {hexagonNodeIllustration && (
-        <div className="absolute top-0 right-0 w-full lg:w-2/3 h-1/3 z-0 pointer-events-none opacity-50">
+        <div className="absolute top-0 left-0 w-full z-0 h-1/2 pointer-events-none opacity-50">
           <Image
             src={urlFor(hexagonNodeIllustration).url()}
             alt="Hexagon Layer"
             fill
-            className="object-cover lg:object-contain object-top-right"
+            className="object-cover lg:object-contain object-top"
           />
         </div>
       )}
@@ -45,16 +66,28 @@ export const OurServices = ({ data }: Services) => {
       )}
 
       <div className="container mx-auto relative z-10 px-6 md:px-12 lg:px-24">
-        <div className="mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
           <h1 className="text-4xl md:text-5xl font-extrabold text-[#0a528f] uppercase tracking-wide">
             {pageTitle || "OUR SERVICES"}
           </h1>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-14 max-w-5xl pl-2 md:pl-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex flex-col gap-14 max-w-5xl pl-2 md:pl-8"
+        >
           {services?.map((service, index) => (
-            <div
+            <motion.div
               key={service?._key || index}
+              variants={itemVariants}
               className="flex flex-col sm:flex-row items-start gap-6 sm:gap-10"
             >
               {/* Illustration / Icon */}
@@ -82,9 +115,9 @@ export const OurServices = ({ data }: Services) => {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
