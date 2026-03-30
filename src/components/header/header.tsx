@@ -74,7 +74,7 @@ export const Header = ({
                         alt="Logo"
                         width={200}
                         height={66}
-                        className="h-10 lg:h-16 w-auto object-contain"
+                        className="px-2 md:p-2 h-10 lg:h-16 w-auto object-contain"
                     />
                 </Link>
 
