@@ -66,7 +66,7 @@ export const Header = ({
 
     return (
         <header className="w-full bg-white sticky top-0 z-50 shadow-sm">
-            <div className="container mx-auto px-4 lg:px-8 py-3 flex items-center justify-between">
+            <div className="container mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="cursor-pointer shrink-0">
                     <Image

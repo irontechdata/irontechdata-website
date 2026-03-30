@@ -72,7 +72,7 @@ export const Footer = ({
     ];
 
     return (
-        <footer className="relative bg-white py-10 dark:bg-black overflow-hidden">
+        <footer id="contact" className="relative bg-white py-10 dark:bg-black overflow-hidden scroll-mt-24">
             <Image
                 src={urlFor(footerData?.footerBackgroundImage ?? "").url()}
                 alt="Footer Background"
