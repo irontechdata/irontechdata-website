@@ -122,6 +122,11 @@ export const pageLanding = defineType({
                                     title: "Subtitle",
                                     type: "string",
                                 }),
+                                defineField({
+                                    name: "link",
+                                    title: "Target Link (e.g. /services#data-analysis)",
+                                    type: "string",
+                                }),
                             ],
                         },
                     ],
