@@ -20,11 +20,17 @@ const containerVariants = {
 };
 
 const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 20, scale: 0.98 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.5 },
+        scale: 1,
+        transition: { 
+            type: "spring" as const,
+            stiffness: 100,
+            damping: 20,
+            duration: 0.8
+        },
     },
 };
 
@@ -43,7 +49,7 @@ export const OurServices = ({ data }: Services) => {
       {/* Background Overlays */}
       {/* Top 1/3 Hexagon Node */}
       {hexagonNodeIllustration && (
-        <div className="absolute top-0 left-0 w-full z-0 h-1/2 pointer-events-none opacity-50">
+        <div className="absolute top-0 left-0 w-full z-0 h-3/5 pointer-events-none opacity-50">
           <Image
             src={urlFor(hexagonNodeIllustration).url()}
             alt="Hexagon Layer"
@@ -72,7 +78,7 @@ export const OurServices = ({ data }: Services) => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#0a528f] uppercase tracking-wide">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-[#0a528f] uppercase tracking-wide text-center md:text-left">
             {pageTitle || "OUR SERVICES"}
           </h1>
         </motion.div>
@@ -82,41 +88,53 @@ export const OurServices = ({ data }: Services) => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex flex-col gap-14 max-w-5xl pl-2 md:pl-8"
+          className="flex flex-col gap-14 max-w-4xl mx-auto"
         >
-          {services?.map((service, index) => (
-            <motion.div
-              key={service?._key || index}
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row items-start gap-6 sm:gap-10"
-            >
+          {services?.map((service, index) => {
+            // Create a clean URL-friendly ID (slugify)
+            const sectionId = service.title
+                ?.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, "") // Remove special chars like &
+                .trim()
+                .replace(/\s+/g, "-"); // Replace spaces with hyphens
+            
+            return (
+              <motion.div
+                id={sectionId}
+                key={service?._key || index}
+                variants={itemVariants}
+                whileInView="visible"
+                viewport={{ once: true, margin: "-10%" }}
+                className="flex flex-col items-center md:flex-row md:items-start gap-8 md:gap-12 scroll-mt-24 md:scroll-mt-32 p-6 rounded-2xl transition-all duration-500"
+              >
               {/* Illustration / Icon */}
               {service?.illustration && (
-                <div className="shrink-0 w-28 h-28 sm:w-36 sm:h-36 relative mt-1">
+                <div className="shrink-0 w-32 h-32 md:w-44 md:h-44 relative mt-1">
                   <Image
                     src={urlFor(service.illustration).url()}
                     alt={service.title || "Service illustration"}
                     fill
-                    className="object-contain object-left"
+                    className="object-contain object-center md:object-left"
                   />
                 </div>
               )}
 
               {/* Text Block */}
-              <div className="flex-1 w-full pt-1">
+              <div className="flex-1 flex flex-col items-center md:items-start w-full pt-1 text-center md:text-left">
                 {service?.title && (
-                  <h3 className="text-2xl font-bold text-black mb-1">
+                  <h3 className="text-2xl md:text-4xl font-bold text-black mb-2">
                     {service.title}
                   </h3>
                 )}
                 {service?.description && (
-                  <div className="prose prose-lg prose-p:leading-snug prose-li:leading-tight text-black max-w-none [&>p]:text-[20px] [&>p:first-of-type]:font-medium [&>p:first-of-type]:text-[#333] [&>ul]:mt-3 [&>ul]:list-disc [&>ul]:pl-5 [&>ul>li]:text-[18px]">
+                  <div className="prose prose-lg prose-p:leading-snug prose-li:leading-tight text-black max-w-none [&>p]:text-[20px] [&>p:first-of-type]:font-medium [&>p:first-of-type]:text-[#333] [&>ul]:mt-3 [&>ul]:list-disc [&>ul]:pl-5 [&>ul>li]:text-[18px] text-center md:text-left">
                     <PortableText value={service.description} />
                   </div>
                 )}
               </div>
             </motion.div>
-          ))}
+          );
+        })}
         </motion.div>
       </div>
     </section>
