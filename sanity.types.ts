@@ -502,6 +502,7 @@ export type PageLanding = {
       };
       title?: string;
       subtitle?: string;
+      link?: string;
       _type: "serviceItem";
       _key: string;
     }>;
@@ -763,6 +764,7 @@ export type PageLandingQueryResult = {
       };
       title?: string;
       subtitle?: string;
+      link?: string;
       _type: "serviceItem";
       _key: string;
     }>;
