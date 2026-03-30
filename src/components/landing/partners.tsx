@@ -22,7 +22,7 @@ export const PartnersSection = ({ data }: { data: PartnersSectionData }) => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="flex items-center justify-center p-4 min-w-[140px] lg:min-w-[180px]"
         >
-            <div className="relative w-full h-16 lg:h-20 max-w-[200px] transition-transform duration-300 hover:scale-105">
+            <div className="relative w-full h-16 lg:h-20 max-w-[200px] transition-transform duration-300 hover:scale-125">
                 <Image
                     src={urlFor(image).url()}
                     alt={`Partner Logo ${index + 1}`}
