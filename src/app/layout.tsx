@@ -38,6 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const siteTitle = settings?.title || "Iron Tech Data";
 
     return {
+        metadataBase: new URL("https://irontechdata.com"),
         title: {
             template: `%s - ${siteTitle}`,
             default: siteTitle,
@@ -53,6 +54,9 @@ export async function generateMetadata(): Promise<Metadata> {
                 },
             ],
         },
+        alternates: {
+            canonical: "https://irontechdata.com"
+        }
     };
 }
 
