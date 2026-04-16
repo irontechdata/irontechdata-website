@@ -45,6 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         description: settings?.description,
         openGraph: {
+            siteName: siteTitle,
             images: [
                 {
                     url: settings?.ogImageUrl || "",
