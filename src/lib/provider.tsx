@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SanityLive } from "@/sanity/lib/live";
 
 export const Provider = ({
     children,
@@ -24,13 +25,16 @@ export const Provider = ({
     const isStudioPath = pathName.startsWith("/studio");
 
     return (
-        <TooltipProvider>
-            <Analytics />
-            <SpeedInsights />
-            {!isStudioPath && <Header headerData={headerData} socialLinksData={socialLinksData} />}
-            {children}
-            {!isStudioPath && <Footer footerData={footerData} socialLinksData={socialLinksData} />}
-            <Toaster />
-        </TooltipProvider>
+        <>
+            {!isStudioPath && <SanityLive />}
+            <TooltipProvider>
+                <Analytics />
+                <SpeedInsights />
+                {!isStudioPath && <Header headerData={headerData} socialLinksData={socialLinksData} />}
+                {children}
+                {!isStudioPath && <Footer footerData={footerData} socialLinksData={socialLinksData} />}
+                <Toaster />
+            </TooltipProvider>
+        </>
     );
 };
