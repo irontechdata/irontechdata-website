@@ -1,4 +1,4 @@
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { siteSettingsQuery, headerQuery, socialLinksQuery, footerQuery } from "@/sanity/queries";
 import { Provider } from "@/lib/provider";
 
@@ -80,6 +80,7 @@ export default async function RootLayout({
                     headerData={headerData}
                     socialLinksData={socialLinksData}
                     footerData={footerData}
+                    sanityLive={<SanityLive />}
                 >
                     {children}
                 </Provider>
