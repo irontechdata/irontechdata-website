@@ -12,7 +12,15 @@ type PartnersSectionData = NonNullable<NonNullable<PageLandingQueryResult>["part
 export const PartnersSection = ({ data }: { data: PartnersSectionData }) => {
     if (!data || !data.partnerImages || data.partnerImages.length === 0) return null;
 
-    const isCarouselActive = data.partnerImages.length > 4;
+    const partnerCount = data.partnerImages.length;
+    const isCarouselActive = partnerCount > 4;
+
+    const gridConfig = {
+        1: "grid-cols-1 max-w-xs",
+        2: "grid-cols-2 max-w-md",
+        3: "grid-cols-2 md:grid-cols-3 max-w-2xl",
+        4: "grid-cols-2 md:grid-cols-4 max-w-3xl",
+    }[partnerCount as 1 | 2 | 3 | 4] || "grid-cols-2 md:grid-cols-4 max-w-3xl";
 
     const LogoItem = ({ image, index }: { image: any; index: number }) => (
         <motion.div
@@ -82,7 +90,7 @@ export const PartnersSection = ({ data }: { data: PartnersSectionData }) => {
                         </CarouselContent>
                     </Carousel>
                 ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-4 w-full max-w-3xl mx-auto items-center justify-center gap-4 lg:gap-8">
+                    <div className={`grid ${gridConfig} w-full mx-auto items-center justify-center gap-4 lg:gap-8`}>
                         {data.partnerImages.map((image, i) => (
                             <div key={image._key || i} className="">
                                 <LogoItem image={image} index={i} />
