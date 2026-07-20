@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Iron Tech Data Website
 
-## Getting Started
+This is the official website for **Iron Tech Data**, built with modern web technologies: Next.js (App Router), React 19, Sanity CMS, Resend (for contact forms), Tailwind CSS v4, and Motion.
 
-First, run the development server:
+---
 
+## 📋 Prerequisites
+
+Before setting up the repository, make sure you have the following installed:
+- **Node.js** (v20+ recommended)
+- **pnpm** (preferred package manager)
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to set up the project locally:
+
+### 1. Install Dependencies
+Install the required package dependencies using `pnpm`:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
+### 2. Configure Environment Variables
+Copy the example environment variables file to create your local environment configuration:
+```bash
+cp .env.example .env.local
+```
+Then, open `.env.local` and populate the keys:
+- `NEXT_PUBLIC_SANITY_PROJECT_ID`: Your Sanity project ID.
+- `NEXT_PUBLIC_SANITY_DATASET`: The dataset environment name (e.g., `production`).
+- `RESEND_API_KEY`: API key for email delivery via Resend.
+- `NEXT_PUBLIC_SITE_URL`: Root site URL (default: `http://localhost:3000`).
+
+### 3. Generate Sanity Types (Important)
+This project uses **Sanity Typegen** to automatically generate TypeScript types from the Sanity schemas and queries. If you make schema changes, or need to initialize types for the first time, run:
+```bash
+pnpm sanityGenerate
+```
+This runs a two-step script under the hood:
+1. `sanity schema extract` — Extracts the Sanity schema layout.
+2. `sanity typegen generate` — Translates the schema into type definitions in `sanity.types.ts`.
+
+### 4. Run the Development Server
+Start the local development server:
+```bash
+pnpm dev
+```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Commands Reference
 
-## Learn More
+The following scripts are defined in `package.json`:
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Description |
+| :--- | :--- |
+| `pnpm dev` | Runs the Next.js local development server. |
+| `pnpm build` | Compiles the production build. |
+| `pnpm start` | Runs the compiled Next.js production build locally. |
+| `pnpm lint` | Runs ESLint analysis on the code. |
+| `pnpm schema` | Extracts Sanity schema definition into `schema.json`. |
+| `pnpm typegen` | Generates TypeScript definitions from schema queries. |
+| `pnpm sanityGenerate` | Combines `schema` and `typegen` commands to sync TS types. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **`src/app/`**: Application routes and pages (Next.js App Router).
+* **`src/components/`**: Reusable React components (e.g., landing sections, forms, layout elements).
+* **`src/sanity/`**: Sanity client settings, configuration, and schema schema definitions.
+* **`src/lib/`**: Shared schemas (e.g., zod validation schemas) and helper utilities.
+* **`public/`**: Static assets like images and SVG icons.
